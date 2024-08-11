@@ -28,7 +28,9 @@ public class UserDaoService {
                 .findFirst().get();
     }
 
+
     public User save(User user) {
-        return null;
+        users.add(user);
+        return user;
     }
 }
