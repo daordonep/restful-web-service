@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 
 public class ErrorDetails {
 
-    private LocalDateTime timestamp;
-    private String message;
-    private String details;
+    private final LocalDateTime timestamp;
+    private final String message;
+    private final String details;
 
     public ErrorDetails(LocalDateTime timestamp, String message, String details) {
         this.timestamp = timestamp;

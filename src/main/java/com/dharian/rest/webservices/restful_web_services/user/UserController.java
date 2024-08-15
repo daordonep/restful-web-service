@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private UserDaoService userDaoService;
+    private final UserDaoService userDaoService;
 
     @Autowired
     public UserController(UserDaoService userDaoService) {
