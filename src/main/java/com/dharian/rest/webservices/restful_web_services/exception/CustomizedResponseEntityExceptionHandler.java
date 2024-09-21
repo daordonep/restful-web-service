@@ -13,6 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
@@ -37,12 +38,10 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
-
-        StringBuilder errors = new StringBuilder();
-        for (FieldError cadena : ex.getFieldErrors()) {
-            errors.append(cadena.getDefaultMessage()).append(" ");
-        }
-        String errorMessage = errors.toString();
+        String errorMessage = ex.getFieldErrors().stream()
+                .map(FieldError::getDefaultMessage)
+                .collect(Collectors.joining(" "));
+        
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
                 errorMessage, request.getDescription(false));
 
